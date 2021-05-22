@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import Textk from "../components/atoms/text";
 import Buttonk from "../components/atoms/button";
-import { list_users } from "../components/variables/user";
+import { user } from "../components/variables/user";
 import Inputk from "../components/molecules/input";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -27,7 +27,7 @@ export default function signUp() {
 
   const handleRegistration = () => {
     if (password == passwordConfirmation) {
-      let check = list_users.filter(
+      let check = user.filter(
         (data) => data.username == username && data.password == password
       );
       if (!check.length) {
@@ -36,11 +36,11 @@ export default function signUp() {
           password:password
         }
         alert("Success Register User");
-        list_users.push(newUser);
-        console.log(list_users);
+        user.push(newUser);
+        console.log(user);
       } else {
         alert("User Already Registered");
-        console.log(list_users);
+        console.log(user);
       }
     } else {
       alert("Check Password Confirmation");
