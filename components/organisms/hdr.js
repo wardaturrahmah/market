@@ -21,7 +21,7 @@ export default function hdr()
 					<Textk value="Peduli Digital" type="Roboto" size="25px" weight="bold" />
 					<div className="row">
 						<div className="col-md-2">
-							<Imagek image="/home/koala.jpg" border="1px solid #FFFFFF" radius="100px" width="50px" height="50px" size="cover"  margin="0px 0px 0px -5px"/>
+							<Imagek image="/home/Koala.jpg" border="1px solid #FFFFFF" radius="100px" width="50px" height="50px" size="cover"  margin="0px 0px 0px -5px"/>
 						</div>
 						<div className="col-md-8 pl-5">
 							<div className="row">
