@@ -25,7 +25,7 @@ export default function image({
           backgroundRepeat: repeat ? repeat : "no-repeat",
           borderRadius: radius ? radius : "5px",
           padding : padding ? padding : "0px",
-		  margin:margin ? margin :"0px"
+		      margin:margin ? margin :"0px"
         }}
       ></div>
     </>

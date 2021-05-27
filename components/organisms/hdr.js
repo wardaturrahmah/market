@@ -31,7 +31,7 @@ export default function hdr()
 								<Textk value="IT" type="Roboto" size="12px" weight="bold" margin="0px"/>
 							</div>
 						</div>
-						<div className="col-md-2" style={{border:"2px solid #437BFA"}}>
+						<div className="col-md-2">
 							
 						</div>
 					</div>
