@@ -4,13 +4,13 @@ import Link from "next/link";
 export default function menu({
   go,
   img,
-  menu
-  
+  menu,
+  click
 }) {
   return (
     <>
 		<Link href={go}>
-		<div className="row mb-2">
+		<div className="row mb-2" onClick={click}>
 			<div className="col-md-2">
 				<Imagek name="mt-1" image={img} radius="0px" border="none" width="15px" height="15px"/>
 			</div>

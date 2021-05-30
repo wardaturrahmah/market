@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { user,check_login,set_login } from "../components/variables/user";
 import { useState } from "react";
-
+import { fetch_data } from "../components/variables/api";
 export default function signIn() {
   const router = useRouter();
   const [luser, setLuser] = useState("");
@@ -21,6 +21,38 @@ export default function signIn() {
   };
 
   const handleLogin = () => {
+     let json={
+        "action": "list",
+        "table": "tx_hdr_user",
+        "where" :[
+                [
+                "user_name","=",username            
+                ],
+                [
+                "user_password","=",password
+                ]
+        ],
+        "first" : "true",
+        "join" : ""
+    };
+    fetch_data("POST","http://localhost/bootcamp-api/list",json).then(function(check){
+      //console.log(check.count);
+      //console.log(check);
+      if(check.count>0)
+      {
+        alert("Login Success");
+        localStorage.setItem("useradmin",JSON.stringify(check.data));
+        var user=localStorage.getItem("useradmin");
+        //console.log(user);
+        router.push("/");
+      }
+      else
+      {
+        alert("Incorrect username/password");
+
+      }
+    });
+    /*
     let check = user.filter(
       (data) => data.username == username && data.password == password
     );
@@ -34,6 +66,7 @@ export default function signIn() {
     } else {
       //alert("Username/Password Wrong");
     }
+    */
   };
 
   return (

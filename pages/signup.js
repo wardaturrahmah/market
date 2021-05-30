@@ -6,7 +6,7 @@ import { user } from "../components/variables/user";
 import Inputk from "../components/molecules/input";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
+import { fetch_data } from "../components/variables/api";
 export default function signUp() {
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -26,22 +26,51 @@ export default function signUp() {
   };
 
   const handleRegistration = () => {
+    console.log(username);
     if (password == passwordConfirmation) {
-      let check = user.filter(
-        (data) => data.username == username && data.password == password
-      );
-      if (!check.length) {
-        let newUser = {
-          username:username,
-          password:password
-        }
-        alert("Success Register User");
-        user.push(newUser);
-        console.log(user);
+      let json={
+        "action": "list",
+        "table": "tx_hdr_user",
+        "where" :[
+            [
+                "user_name","=",username            ]
+        ],
+        "first" : "true",
+        "join" : ""
+    };
+    fetch_data("POST","http://localhost/bootcamp-api/list",json).then(function(check){
+        if (check.count==0) {
+        let newUser=    {
+            "action" : "save",
+            "table_hdr" : "tx_hdr_user",
+            "data_hdr" : [
+                {
+                    "user_name" : username,
+                    "user_password" :password
+                }
+            ],
+            "table_dtl" : "",
+            "join_column_hdr" : "",
+            "join_column_dtl" :"",
+            "data_dtl" :""
+        };
+        fetch_data("POST","http://localhost/bootcamp-api/list",newUser).then(function(result){
+          
+          if(result.success==true)
+          {
+            alert("Register success");
+            router.push("/signin");
+          }
+          else
+          {
+            alert(result.message);
+          }
+        });
       } else {
         alert("User Already Registered");
         console.log(user);
       }
+      });
     } else {
       alert("Check Password Confirmation");
     }
@@ -61,7 +90,7 @@ export default function signUp() {
                 value="Start your New Journey With Us"
                 size="24px"
                 weight="bold"
-                marginTop="20px"
+                margin="20px 0px 0px 0px"
               />
               <Textk
                 value="Build your own shop using peduli digital Marketplace You can sell all your favorite item and get easy money"
@@ -95,13 +124,13 @@ export default function signUp() {
                 }
               />
               <Buttonk
-                onClick={handleRegistration}
+                click={handleRegistration}
                 value="Register"
                 color="#FFF"
                 width="100%"
-                background="#0086CF"
+                bg="#0086CF"
                 height="52px"
-                customClass="mt-4"
+                name="mt-4"
               />
               <p className="mt-4">
                 Already Have An Account{" "}

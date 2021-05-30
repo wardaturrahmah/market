@@ -12,7 +12,21 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import Overlay from 'react-bootstrap/Overlay';
 export default function hdr()
 {
-
+	const router = useRouter();
+	let user;
+	if (typeof 	Storage !== 'undefined') {		
+		user=JSON.parse(localStorage.getItem("useradmin"));
+		if(!user)
+		{
+			router.push('/signin');
+		}
+	}
+	//console.log(user);
+	const handlelogout = () => {
+    	
+    	localStorage.removeItem("useradmin");
+    	console.log("Logout");
+  	};
 	return(
 		<>
 			<div className="col-md-3 text-left">
@@ -21,14 +35,14 @@ export default function hdr()
 					<Textk value="Peduli Digital" type="Roboto" size="25px" weight="bold" />
 					<div className="row">
 						<div className="col-md-2">
-							<Imagek image="/home/koala.jpg" border="1px solid #FFFFFF" radius="100px" width="50px" height="50px" size="cover"  margin="0px 0px 0px -5px"/>
+							<Imagek image="/home/Koala.jpg" border="1px solid #FFFFFF" radius="100px" width="50px" height="50px" size="cover"  margin="0px 0px 0px -5px"/>
 						</div>
 						<div className="col-md-8 pl-5">
 							<div className="row">
-								<Textk value="Wardah" type="Roboto" size="18px" weight="bold" margin="0px"/>
+								<Textk value={user? user.user_name : ""} type="Roboto" size="18px" weight="bold" margin="0px"/>
 							</div>
 							<div className="row">
-								<Textk value="IT" type="Roboto" size="12px" weight="bold" margin="0px"/>
+								<Textk value="Admin" type="Roboto" size="12px" weight="bold" margin="0px"/>
 							</div>
 						</div>
 						<div className="col-md-2">
@@ -38,10 +52,10 @@ export default function hdr()
 					<div className="mt-5">
 						<Menuk go="/dashboard" menu="Dashboard" img="/icon/ic1.svg"/>
 						<Menuk go="/product" menu="Products" img="/icon/ic2.svg"/>
-						<Menuk go="/selling" menu="Selling" img="/icon/ic3.svg"/>
+						{/*<Menuk go="/selling" menu="Selling" img="/icon/ic3.svg"/>
 						<Menuk go="/payment" menu="Payment" img="/icon/ic4.svg"/>
-						<Menuk go="/upcoming" menu="Upcoming" img="/icon/ic5.svg"/>
-						<Menuk go="/signin" menu="Logout" img="/icon/ic6.svg"/>
+						<Menuk go="/upcoming" menu="Upcoming" img="/icon/ic5.svg"/>*/}
+						<Menuk go="/signin" click={handlelogout} menu="Logout" img="/icon/ic6.svg"/>
 						
 					</div>
 				</div>
