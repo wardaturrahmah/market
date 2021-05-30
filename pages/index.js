@@ -94,16 +94,7 @@ export default function Home()
         fetch_data("POST","http://localhost/bootcamp-api/list",newproduct).then(function(result){
         	if(result.success==true)
         	{
-          		let list={
-				    "action": "list",
-				    "table": "tx_product",
-				    "where" :"",
-				    "first" : "false",
-				    "join" : ""
-				};
-				fetch_data("POST","http://localhost/bootcamp-api/list",list).then(function(result){
-					setdata(result.data);
-				});
+          		setdata(result.list);
 				setsuccess(true);
           	}
           	else
@@ -117,7 +108,7 @@ export default function Home()
 
 	const handledelete = (e) => 
 	{
-		console.log(deleteid);
+		//console.log(deleteid);
 		let deletepro={
 		    "action": "delete",
 		    "table": "tx_product",
@@ -130,16 +121,7 @@ export default function Home()
 		fetch_data("POST","http://localhost/bootcamp-api/list",deletepro).then(function(result){
         	if(result.success==true)
         	{
-          		let list={
-				    "action": "list",
-				    "table": "tx_product",
-				    "where" :"",
-				    "first" : "false",
-				    "join" : ""
-				};
-				fetch_data("POST","http://localhost/bootcamp-api/list",list).then(function(result){
-					setdata(result.data);
-				});
+          		setdata(result.list);
 				setShow2(false);
 				setdelete(true);
           	}
