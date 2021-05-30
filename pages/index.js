@@ -19,6 +19,10 @@ import Link from "next/link";
 export default function Home()
 {
 	const router = useRouter();
+	let user;
+	if (typeof 	Storage !== 'undefined') {		
+		user=JSON.parse(localStorage.getItem("useradmin"));
+	}
 	const [data, setdata] = useState("");
 	useEffect(()=>{
 		let list={
@@ -220,7 +224,7 @@ export default function Home()
 					</Modal.Body>
 				</Modal>
 				
-				<Textk value="Hello Wardah," type="Roboto" size="18px" weight="none" margin="0px"/>
+				<Textk value={user? "Hello "+user.user_name : ""} type="Roboto" size="18px" weight="none" margin="0px"/>
 				<Textk value="This is Your Products" type="Roboto" size="36px" weight="bold" margin="0px"/>
 				<div className="row mt-5">
 					<div className="col-md-6">
