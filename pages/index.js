@@ -246,7 +246,7 @@ export default function Home()
                 				return (
                 					<>
                 					<tr>
-										<td width="10%"><Imagek name="mt-1" radius="0px" image={product.product_photo} width="39px" height="44px"/></td>
+										<td width="10%"><Imagek name="mt-1" radius="0px" width="39px" height="44px"/></td>
 										<td width="40%">{product.product_name}</td>
 										<td width="20%">{product.product_price}</td>
 										<td width="20%">{product.product_stock}</td>
